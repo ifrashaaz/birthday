@@ -1286,165 +1286,225 @@ body {
     padding: 10px;
 }
 
-/* Adjust for mobile screens */
-@media screen and (max-width: 658px) {
-    .letter__border {
-        width: 95vw;
-        height: 65vh;
-        max-height: none;
-        padding: 10px;
+/* ===================================================
+   FIXED MOBILE RESPONSIVE BLOCK
+   =================================================== */
+/* @media screen and (max-width: 768px) {
+   
+    .boxMail .boxMail-container {
+        width: 90vw !important;
+        height: 70vh !important;
+        max-height: 550px;
+        transform: none !important; 
+        margin: 0 auto;
+        display: block; 
+    }
+
+    
+    .boxMail .boxMail-container:hover {
+        transform: none !important;
+        filter: none !important;
+    }
+
+    .boxMail .boxMail-container .card1 {
+        display: none; 
+    }
+
+    
+    .boxMail .boxMail-container .card2 {
+        position: relative !important;
+        width: 100% !important;
+        height: 100% !important;
+        left: 0 !important;
+        top: 0 !important;
+        transform: none !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+    }
+
+    
+    .boxMail .boxMail-container .card2 .card2-content {
+        width: 100% !important;
+        height: 100% !important;
+        transform: none !important; 
+        box-shadow: none !important;
+        padding: 20px !important;
+        overflow-y: auto !important; 
+        display: flex;
+        flex-direction: column;
+    }
+
+    
+    .boxMail .boxMail-container .card2 h3,
+    .boxMail .boxMail-container .card2 h2 {
+        opacity: 1 !important;
+        visibility: visible !important;
+        animation: none !important;
+        padding: 10px 0 !important;
+        text-align: left;
+    }
+
+    .boxMail .boxMail-container .card2 h3 {
+        font-size: 22px !important;
+    }
+
+    .boxMail .boxMail-container .card2 h2 {
+        font-size: 16px !important;
+        line-height: 1.5;
+    }
+
+
+    .box__letter .letter__border {
+        width: 95vw !important;
+        height: 80vh !important;
+        top: 50% !important;
+        left: 50% !important;
+        transform: translate(-50%, -50%) !important;
     }
 
     .content__letter {
-        flex-direction: column;
-        height: calc(100% - 60px);
-        overflow-y: auto;
+        flex-direction: column !important;
+        overflow-y: auto !important;
     }
 
-    .content__letter .left,
+    .content__letter .left, 
     .content__letter .right {
-        width: 100%;
-        padding: 5px;
+        width: 100% !important;
+        border-right: none !important;
+        padding: 10px !important;
+    }
+} */
+
+@media screen and (max-width: 768px) {
+    .content { flex-direction: column; padding-top: 1rem; }
+    .content .left, .content .right { width: 100%; }
+
+    .boxMail-container {
+        width: 90vw !important;
+        height: 70vh !important;
+        margin-top: 50px;
     }
 
-    .title__letter {
-        font-size: 1.5rem !important;
+    /* Stack cards flat on mobile to prevent "floating out" */
+    .card1, .card2 {
+        width: 100% !important;
+        left: 0 !important;
+        transform: none !important;
     }
 
-    .text__letter {
-        font-size: 1rem !important;
+    /* Hide cover once opened on mobile */
+    .boxMail-container.open .card1 {
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    .card2-content {
+        font-size: 1.1rem !important;
+        padding: 20px !important;
+    }
+    
+    .title { font-size: 2rem !important; }
+}
+
+/* --- FINAL FIX FOR TEXT ALIGNMENT --- */
+
+/* 1. This centers the message perfectly inside the pink box */
+.card2-content {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important; /* Vertical center */
+    align-items: center !important;     /* Horizontal center */
+    text-align: center !important;
+    padding: 20px !important;
+    height: 100% !important;
+    width: 100% !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+}
+
+/* 2. This removes the 'downward' push from titles and paragraphs */
+.card2-content h2, 
+.card2-content h3, 
+.card2-content p {
+    margin: 5px 0 !important; /* Small, even spacing */
+    position: relative !important;
+    top: 0 !important; 
+    transform: none !important; /* Removes any hidden animation offsets */
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+/* 3. Mobile specific adjustment to pull the box up higher on the screen */
+@media screen and (max-width: 768px) {
+    .boxMail-container {
+        top: 5% !important; /* Moves the whole card up toward the top of the phone */
     }
 }
 
-/* Optional: smooth scrolling for mobile */
-.letter__border .content__letter::-webkit-scrollbar {
-    width: 6px;
+/* Ensure the letter text is visible and centered on Laptop/Desktop */
+.card2-content {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important; /* Starts text from top */
+    align-items: center !important;
+    padding: 40px 20px !important; /* Adds space so text isn't hitting edges */
+    height: 100% !important;
+    width: 100% !important;
+    overflow-y: auto !important; /* Adds a scrollbar if the letter is long */
+    box-sizing: border-box !important;
 }
 
-.letter__border .content__letter::-webkit-scrollbar-thumb {
-    background-color: var(--color-text-pink);
-    border-radius: 3px;
+/* Reset the text inside the letter */
+.card2-content p, 
+.card2-content h2 {
+    position: relative !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    margin: 10px 0 !important;
+    transform: none !important; /* Fixes text flying off screen */
+    color: white !important; /* Ensure color contrasts with background */
+    font-size: 1.2rem; /* Adjusted for laptop readability */
 }
 
-.letter__border .content__letter::-webkit-scrollbar-track {
-    background: transparent;
+@media screen and (max-width: 768px) {
+    /* 1. Hide the background titles when the letter is open so they don't overlap */
+    .boxMail.active ~ #wrapper .title,
+    .boxMail.active ~ .title {
+        display: none !important;
+    }
+
+    /* 2. Fix the container size */
+    .boxMail .boxMail-container {
+        width: 90vw !important;
+        height: 60vh !important;
+        top: 10% !important; /* Pulls it up from the bottom */
+        transform: none !important;
+    }
+
+    /* 3. Center the 'Happy Birthday' inside the card */
+    .card2-content h2, 
+    .card2-content h3 {
+        font-size: 1.8rem !important; /* Shrink font so it stays inside */
+        margin: 0 0 10px 0 !important;
+        padding: 0 !important;
+        position: static !important; /* Removes absolute positioning that causes 'leaks' */
+        text-align: center !important;
+        color: white !important;
+    }
+
+    /* 4. Ensure the letter text is scrollable and centered */
+    .card2-content {
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: flex-start !important;
+        align-items: center !important;
+        padding: 20px !important;
+        overflow-y: auto !important; /* Fixes text going 'too down' */
+    }
+
+    /* 5. Hide the front cover immediately when opened to reveal the text */
+    .boxMail-container.open .card1 {
+        display: none !important;
+    }
 }
-
-@media (max-width: 768px) {
-
-  /* Disable rotation only on mobile */
-  .boxMail,
-  .boxMail-container,
-  .card1,
-  .card2,
-  .card2-content {
-    transform: none !important;
-  }
-
-  /* Letter popup sizing */
-  .letter__border {
-    width: 95vw !important;
-    height: 75vh !important;
-    max-height: 75vh !important;
-    padding: 12px !important;
-    overflow: hidden !important;
-  }
-
-  /* Only text scrolls */
-  .letter__border .letter {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .letter_border .content_letter {
-    flex: 1;
-    overflow-y: auto !important;
-    -webkit-overflow-scrolling: touch;
-  }
-
-  .text__letter {
-    font-size: 1rem !important;
-    line-height: 1.6;
-  }
-}
-@media (max-width: 768px) {
-
-  /* Disable rotation only on mobile */
-  .boxMail,
-  .boxMail-container,
-  .card1,
-  .card2,
-  .card2-content {
-    transform: none !important;
-  }
-
-  /* Letter popup sizing */
-  .letter__border {
-    width: 95vw !important;
-    height: 75vh !important;
-    max-height: 75vh !important;
-    padding: 12px !important;
-    overflow: hidden !important;
-  }
-
-  /* Only text scrolls */
-  .letter__border .letter {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .letter_border .content_letter {
-    flex: 1;
-    overflow-y: auto !important;
-    -webkit-overflow-scrolling: touch;
-  }
-
-  .text__letter {
-    font-size: 1rem !important;
-    line-height: 1.6;
-  }
-}
-/* ===============================
-   MOBILE ONLY FIX – DO NOT TOUCH DESKTOP
-   =============================== */
-@media (max-width: 768px) {
-
-  /* Disable rotation only on mobile */
-  .boxMail,
-  .boxMail-container,
-  .card1,
-  .card2,
-  .card2-content {
-    transform: none !important;
-  }
-
-  /* Letter popup sizing */
-  .letter__border {
-    width: 95vw !important;
-    height: 75vh !important;
-    max-height: 75vh !important;
-    padding: 12px !important;
-    overflow: hidden !important;
-  }
-
-  /* Only text scrolls */
-  .letter__border .letter {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .letter_border .content_letter {
-    flex: 1;
-    overflow-y: auto !important;
-    -webkit-overflow-scrolling: touch;
-  }
-
-  .text__letter {
-    font-size: 1rem !important;
-    line-height: 1.6;
-  }
-}
-

@@ -242,6 +242,29 @@
   }
 
 </script> -->
+<script>
+// Select the elements
+const btnLetter = document.getElementById('btn__letter');
+const boxMail = document.querySelector('.boxMail');
+const container = document.querySelector('.boxMail-container');
+const closeBtn = document.querySelector('.fa-xmark');
+
+// 1. When "Click Here Babe" is clicked, show the dark overlay (the Box)
+btnLetter.onclick = function() {
+    boxMail.classList.add('active');
+};
+
+// 2. When the Card itself is clicked, trigger the "Opening" animation
+container.onclick = function(e) {
+    // This adds/removes the .open class which triggers the CSS transition
+    this.classList.toggle('open');
+};
+
+// 3. When the 'X' is clicked, hide everything
+closeBtn.onclick = function() {
+    boxMail.classList.remove('active');
+    container.classList.remove('open'); // Reset the letter so it's closed next time
+};</script>
 </body>
 <script>
     let datetxt = "25 Dec";
